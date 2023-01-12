@@ -29,7 +29,7 @@ where
 
 --4
 select 
-	L.[LectureRoom],count(L.[Id])
+	L.[LectureRoom] as 'Lecture room',count(L.[Id]) as 'Number of lectures'
 from 
 	[Lectures] as L
 group by 
@@ -69,7 +69,7 @@ from
 
 --9
 select 
-	T.[Name] + ' ' + T.[Surname] as 'Fullname',count(S.[Id]) as 'Number of disciplines'
+	T.[Name] + ' ' + T.[Surname] as 'Fullname',count(S.[Id]) as 'Number of subjects'
 from 
 	[Teachers] as T,[Lectures] as L,[Subjects] as S
 where 
@@ -84,6 +84,8 @@ from
 	[Lectures] as L, [GroupsLectures] as GL
 group by 
 	GL.[DayOfWeek]
+order by
+	GL.[DayOfWeek] asc
 
 --11
 select 
@@ -94,6 +96,8 @@ where
 	D.[Id] = G.[DepartmentId] and G.[Id] = GL.[GroupId] and GL.[LectureId] = L.[Id]
 group by
 	L.[LectureRoom]
+order by
+	L.[LectureRoom] asc
 
 --12
 select 
