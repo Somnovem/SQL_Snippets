@@ -9,7 +9,7 @@ from
 	 LectureRooms as LR  join Schedules as S on S.LectureRoomId = LR.Id
 	  join Lectures as L on S.LectureId = L.Id 
 	  join Teachers as T on L.TeacherId = T.Id
-	 where T.[Name] = 'Edward Hopper'
+	 where T.[Name] + ' ' + T.[Surname] = 'Edward Hopper'
 
 --2
 select 
@@ -29,7 +29,7 @@ from
 	  join Teachers as T on L.TeacherId = T.Id
 	  join GroupsLectures as GL on GL.LectureId = L.Id
 	  join Groups as G on GL.GroupId = G.Id
-	 where T.[Name] = 'Alex Carmack' and G.[Year] = 5
+	 where T.[Name] + ' ' + T.[Surname] = 'Alex Carmack' and G.[Year] = 5
 
 --4
 select 
