@@ -88,10 +88,12 @@ returns @table table(
 as
 	begin
 		insert into @table
-		select E.Lastname,E.Firstname,E.Fathersname,E.DateIn,E.Gender,E.Salary
-		from Employees as E
-		group by E.Lastname,E.Firstname,E.Fathersname,E.DateIn,E.Gender,E.Salary
-		having count(E.Lastname) > 1;
+		select Lastname,Firstname,Fathersname,DateIn,Gender,Salary
+		from Employees
+		where Lastname = any(select E.Lastname
+						from Employees as E
+						group by E.Lastname
+						having count(E.Lastname) > 1)
 		return
 	end
 
@@ -106,7 +108,9 @@ as
 		insert into @table
 		select C.Lastname,C.Firstname,C.Fathersname,C.Gender,C.Email,C.Phone,C.IsSubscribed,C.SalePercent
 		from Clients as C
-		group by C.Lastname,C.Firstname,C.Fathersname,C.Gender,C.Email,C.Phone,C.IsSubscribed,C.SalePercent
-		having count(C.Lastname) > 1;
+		where C.Lastname = any(select Lastname
+						from Clients
+						group by Lastname
+						having count(Lastname) > 1)
 		return
 	end
