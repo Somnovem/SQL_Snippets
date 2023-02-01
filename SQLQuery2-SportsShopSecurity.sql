@@ -1,9 +1,11 @@
 USE [SportsShop]
 GO
+
 CREATE ROLE [fullAccess] 
 GO
 ALTER ROLE [db_owner] add member [fullAccess]
 GO
+
 CREATE ROLE [salesman] 
 GO
 GRANT INSERT ON [dbo].[Products] TO [salesman]
